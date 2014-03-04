@@ -2,7 +2,7 @@
 #include <LiquidCrystal_I2C.h>
 #include <twi.h>
 /******************************************
- * 	PURPOSE:	Displays text sent over the serial port (e.g. from the Serial Monitor) on
+ * 	PURPOSE:	Display text sent over the serial port (e.g. from the Serial Monitor) on
  * an attached LCD.
  * 	Created by      Sam Leong
  * 	Website:	www.b2cqshop.com
