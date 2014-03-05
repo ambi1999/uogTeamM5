@@ -10,9 +10,9 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
 import java.io.BufferedReader;
-
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Date;
 
 public class ArduinoController {
 	static BufferedReader input;
@@ -53,7 +53,9 @@ public class ArduinoController {
 						System.out.println(value);
 						if (value == 8) {
 							System.out.println("finish and create bar chart");
+							//insertIntoDatabase(new Date().getTime(),responseValues);
 							drawChart(responseValues);
+							
 							break;
 						}
 					}
