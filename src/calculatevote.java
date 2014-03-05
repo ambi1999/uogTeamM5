@@ -5,16 +5,16 @@ public class calculatevote {
 		
 
 		
-		{
+		
 		    // instance variables 
-		    private Scanner keyboard;
-		    private votemanager ballot;
-		    private String votingMessage;
-
+		    final Scanner keyboard;
+		    votemanager ballot;
+		    String votingMessage;
+	}
 		
 		    public calculatevote()
 		    {
-		        keyboard = new Scanner(System.in);
+		        Scanner keyboard = new Scanner(System.in);
 		    }
 
 		    /**
@@ -33,8 +33,9 @@ public class calculatevote {
 
 		    /**
 		     * Displays the instructions for the top level menu
+		     * @return 
 		     */
-		    private void displayMainMenu()
+		    private Object displayMainMenu()
 		    {
 		        System.out.println("Options are");
 		        System.out.println("    To vote for Fred          Enter 1");
@@ -42,6 +43,9 @@ public class calculatevote {
 		        System.out.println("    To vote for Joe           Enter 3"); 
 		        System.out.println("    To vote for Jane          Enter 4");
 		        System.out.println("To close    Enter 0");
+				;
+				return null;
+			
 		    }
 
 		    /**
@@ -51,19 +55,19 @@ public class calculatevote {
 		    {
 		        if(command == 1)
 		        {
-		            branch1.incrementVoteCound();
+		            branch.incrementVoteCount();
 		        }
 		        else if(command == 2)
 		        {
-		            branch2.incrementVoteCound();
+		            branch.incrementVoteCount();
 		        }
 		        else if(command == 3)
 		        {
-		            branch3.incrementVoteCound();
+		            branch.incrementVoteCount();
 		        }
 		        else if(command == 4)
 		        {
-		            branch4.incrementVoteCound();
+		            branch.incrementVoteCount();
 		        }            
 		        else if(command == 0)
 		        {
@@ -83,14 +87,16 @@ public class calculatevote {
 		    private int getCommand()
 		    {
 		        System.out.print("Enter command: ");
-		        return keyboard.nextInt();
+		        Scanner keyboard =null;
+				return keyboard.nextInt();
 		    }
 
 		    /**
 		     * Method printBookingDetails
 		     * This method allows you to print the full booking details, including title, full name, booking number and room type.
+		     * @return 
 		     */
-		    private void setupBallot()
+		    private Object setupBallot()
 		    {
 		        return displayMainMenu();
 		    }
@@ -98,8 +104,8 @@ public class calculatevote {
 		    private void setupVoteMessage(String vote)
 		    {
 		    }
-		}	
+			
 
 	}
 
-}
+

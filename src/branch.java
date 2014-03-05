@@ -2,7 +2,7 @@
 public class branch {
 
 	private String id;
-	private int votes;
+	private static int votes;
 	
 	
 	
@@ -15,7 +15,7 @@ public class branch {
 	{
 	this.id = id;
 	}
-	public void incrementVoteCount()
+	public static void incrementVoteCount()
 	{
 		votes++;
 	}
@@ -26,5 +26,9 @@ public class branch {
 	public int getNumberOfVotes()
 	{
 		return votes;
+	}
+	public static void castVote() {
+		// TODO Auto-generated method stub
+		
 	}
 }

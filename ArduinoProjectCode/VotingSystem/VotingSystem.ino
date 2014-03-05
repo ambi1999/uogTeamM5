@@ -63,7 +63,7 @@ void remote_deal(void)//The results of the implementation of decoding function
         //Serial.println(comL_code, HEX);//Hexadecimal display
         //Serial.println(comL_code);
         
-        Serial.print("the key value is : ");
+        //Serial.print("the key value is : ");
         Serial.println(convertHexToKeyPressed(comL_code));
       }
 }
