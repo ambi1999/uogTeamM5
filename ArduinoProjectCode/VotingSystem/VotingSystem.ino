@@ -11,6 +11,38 @@ int adr_code=0x00;// User-coded values
 char comL_code=0x00;//Command code
 char comH_code=0x00;//Anti-code command
 
+
+//new function coded by team
+int convertHexToKeyPressed(char a){
+  int result=-999;
+  
+  if(a==0x16 ){
+  result=0;
+   
+  }else if (a == 0xC){
+  result=1;
+  }else if (a == 0x18){
+  result=2;
+  }else if (a == 0x5E){
+  result=3;
+  }else if (a == 0x8){
+  result=4;
+  }else if (a == 0x1C){
+  result=5;
+  }else if (a == 0x5A){
+  result=6;
+  }else if (a == 0x42){
+  result=7;
+  }else if (a == 0x52){
+  result=8;
+  }else if (a == 0x4A){
+  result=9;
+  }
+  
+  return result;
+}
+
+
 void timer1_init(void)//Timer initialization function
 {
   TCCR1A = 0X00; 
@@ -24,12 +56,15 @@ void remote_deal(void)//The results of the implementation of decoding function
       //Show Data
       if(adr_code!=0XFF)
       {
-        Serial.print("aaaaa the Address Code is : "); 
+        //Serial.print("aaaaa the Address Code is : "); 
         //Serial.println(adr_code, HEX);//Hexadecimal display
-        Serial.println(adr_code);
-        Serial.print("the Command code is : ");
+        //Serial.println(adr_code);
+        //Serial.print("the Command code is : ");
         //Serial.println(comL_code, HEX);//Hexadecimal display
-        Serial.println(comL_code);
+        //Serial.println(comL_code);
+        
+        Serial.print("the key value is : ");
+        Serial.println(convertHexToKeyPressed(comL_code));
       }
 }
 char logic_value()//Determine the logic value "0" and "1" Functions
@@ -126,6 +161,8 @@ void setup()
   pinMode(IR_IN,INPUT);//Set the infrared receiver input pin
   // start serial port at 9600 bps:
   Serial.begin(9600);
+  
+  //pinMode(8, INPUT);
 }
 void loop()
 {  
@@ -134,6 +171,22 @@ void loop()
   {
     remote_decode();  //Decoding
     remote_deal();   //Perform decoding results
+    //delay added to stop consecutive print of values
+    delay(200);
   }  
+  
+
+}
+
+
+
+void loop_Old(){
+
+  // print out the value you read:
+ 
+int a=digitalRead(8);
+Serial.println(a);
+delay(500);
+
 }
 
