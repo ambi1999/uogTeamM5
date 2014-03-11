@@ -172,7 +172,7 @@ void loop()
     remote_decode();  //Decoding
     remote_deal();   //Perform decoding results
     //delay added to stop consecutive print of values
-    delay(200);
+    delay(100);
   }  
   
 

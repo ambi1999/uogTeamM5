@@ -27,7 +27,7 @@ public class ArduinoController {
 
 			// for windows
 			CommPortIdentifier portId = CommPortIdentifier
-					.getPortIdentifier("COM3");
+					.getPortIdentifier("COM4");
 			// CommPortIdentifier portId =
 			// CommPortIdentifier.getPortIdentifier("COM4");
 
@@ -52,10 +52,10 @@ public class ArduinoController {
 						
 						System.out.println(value);
 						if (value == 8) {
-							System.out.println("finish and create bar chart");
+				/*		 System.out.println("finish and create bar chart");
 							//insertIntoDatabase(new Date().getTime(),responseValues);
-							drawChart(responseValues);
-							
+							drawChart(responseValues); */
+							process(responseValues);
 							break;
 						}
 					}
@@ -68,38 +68,55 @@ public class ArduinoController {
 
 		}
 		
-	//responses = 112221111323114	
+		public static void process(String responseValues) {
+			//int newArray[]= new int [30];
+			
+			char[] newArray = responseValues.toCharArray();
+			
+			System.out.println(newArray[0]);
+			System.out.println(newArray[1]);
+			System.out.println(newArray[2]);
+			System.out.println(newArray[3]);
+			System.out.println(newArray[4]);
+			System.out.println(newArray[5]);
+			System.out.println(newArray[6]);
+			System.out.println(newArray[7]);
+			
+			
+		}
+		
+		public static void main(String[]args) throws Exception {
+			//process("23223211134445");
+			
+			readFromArduinoAndCreateBarChart();
+		}
+
 	public static void drawChart(String responses){
 		
-		int numofOnes=0;
-		int numofTwos=0;
-		int numofThrees=0;
-		int numofFours=0;
+		int responseValues=0;
+		
 		
 		
 		//parse array
-		/*
-		if(==1){
-			numofOnes=numofOnes+1;
-		}		if(==1){
-			numofTwos=numofTwos+1;
-		}
-		*/
 		
-		numofOnes=6;
-		numofTwos=2;
-		numofThrees=2;
-		numofFours=1;
+		if(responseValues==1){
+			responseValues=responseValues+1;
+		}		if(responseValues==2){
+			responseValues=responseValues+1;
+		}
+		
+		
+		
 		
 		System.out.print("1: ");
-		for(int i=0;i<numofOnes;i++){
+		for(int i=0;i<responseValues;i++){
 			System.out.print("*");
 		}
 		
 		System.out.println();
 		
 		System.out.print("2: ");
-		for(int i=0;i<numofTwos;i++){
+		for(int i=0;i<responseValues;i++){
 			System.out.print("*");
 		}
 		
@@ -107,7 +124,7 @@ public class ArduinoController {
 		
 		
 		System.out.print("3: ");
-		for(int i=0;i<numofThrees;i++){
+		for(int i=0;i<responseValues;i++){
 			System.out.print("*");
 		}
 		
@@ -115,7 +132,7 @@ public class ArduinoController {
 		
 		
 		System.out.print("4: ");
-		for(int i=0;i<numofFours;i++){
+		for(int i=0;i<responseValues;i++){
 			System.out.print("*");
 		}
 
@@ -123,11 +140,9 @@ public class ArduinoController {
 		
 	}
 		
-	public static void main(String[] args) throws Exception {
-		
-		//readFromArduinoAndCreateBarChart();
-		drawChart("12121212");
+	
 
 }
+
 	
-}
+
