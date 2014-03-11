@@ -14,7 +14,7 @@ char comH_code=0x00;//Anti-code command
 
 //new function coded by team
 int convertHexToKeyPressed(char a){
-  int result=-999;
+  int result=0;
   
   if(a==0x16 ){
   result=0;
@@ -166,13 +166,15 @@ void setup()
 }
 void loop()
 {  
+  
   timer1_init();//Timer initialization
   while(1)
   {
+    
     remote_decode();  //Decoding
     remote_deal();   //Perform decoding results
     //delay added to stop consecutive print of values
-    delay(100);
+    delay(50);
   }  
   
 
@@ -180,13 +182,4 @@ void loop()
 
 
 
-void loop_Old(){
-
-  // print out the value you read:
- 
-int a=digitalRead(8);
-Serial.println(a);
-delay(500);
-
-}
 

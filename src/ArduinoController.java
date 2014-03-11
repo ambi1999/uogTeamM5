@@ -19,15 +19,16 @@ public class ArduinoController {
 
 	static OutputStream output;
 	
+	
 	//This function will read value from serial port and send email if the value is more than 400
 		public static void readFromArduinoAndCreateBarChart() throws Exception {
+			System.out.println("1111");
 			// for linux
 			// CommPortIdentifier portId =
 			// CommPortIdentifier.getPortIdentifier("/dev/ttyACM3");
 
 			// for windows
-			CommPortIdentifier portId = CommPortIdentifier
-					.getPortIdentifier("COM4");
+			CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier("COM3");
 			// CommPortIdentifier portId =
 			// CommPortIdentifier.getPortIdentifier("COM4");
 
@@ -41,17 +42,19 @@ public class ArduinoController {
 			
 			
 			while (true) {
-
+				
 				try {
 					String inputLine = null;
 					if (input.ready()) {
+						
 						inputLine = input.readLine();
 						// System.out.println(inputLine);
 						int value = Integer.parseInt(inputLine);
 						responseValues=responseValues+value;
 						
-						System.out.println(value);
+						System.out.println("[" + responseValues + "]");
 						if (value == 8) {
+							
 				/*		 System.out.println("finish and create bar chart");
 							//insertIntoDatabase(new Date().getTime(),responseValues);
 							drawChart(responseValues); */
@@ -63,25 +66,91 @@ public class ArduinoController {
 					ex.printStackTrace();
 				}
 				
-				port.close();
+				
 			}
-
+			
+			port.close();
+			
 		}
 		
 		public static void process(String responseValues) {
 			//int newArray[]= new int [30];
-			
+			System.out.println("Entering process");
 			char[] newArray = responseValues.toCharArray();
 			
-			System.out.println(newArray[0]);
-			System.out.println(newArray[1]);
-			System.out.println(newArray[2]);
-			System.out.println(newArray[3]);
-			System.out.println(newArray[4]);
-			System.out.println(newArray[5]);
-			System.out.println(newArray[6]);
-			System.out.println(newArray[7]);
+			int numofOnes=0;
+			int numofTwos=0;
+			int numofThrees=0;
+			int numofFours=0;
+
+
+			//parse array
+			/*
+			if(==1){
+				numofOnes=numofOnes+1;
+			}		if(==1){
+				numofTwos=numofTwos+1;
+			}
+			*/
+
 			
+			
+			for(int i=0;i<newArray.length;i++){
+				if(newArray[i]=='1'){
+					numofOnes=numofOnes+1;	
+				}
+				
+				if(newArray[i]=='2'){
+					numofTwos=numofTwos+1;	
+				}
+				
+				
+				if(newArray[i]=='3'){
+					numofThrees=numofThrees+1;	
+				}
+				
+				
+				if(newArray[i]=='4'){
+					numofFours=numofFours+1;	
+				}
+				
+				//System.out.println(newArray[i]);
+				}
+				
+			
+			
+			
+			System.out.print("1: ");
+			for(int i=0;i<numofOnes;i++){
+				System.out.print("*");
+			}
+
+			System.out.println();
+
+			System.out.print("2: ");
+			for(int i=0;i<numofTwos;i++){
+				System.out.print("*");
+			}
+
+			System.out.println();
+
+
+			System.out.print("3: ");
+			for(int i=0;i<numofThrees;i++){
+				System.out.print("*");
+			}
+
+			System.out.println();
+
+
+			System.out.print("4: ");
+			for(int i=0;i<numofFours;i++){
+				System.out.print("*");
+			}
+			
+			
+			
+			System.out.println("Exiting process");
 			
 		}
 		
@@ -89,6 +158,7 @@ public class ArduinoController {
 			//process("23223211134445");
 			
 			readFromArduinoAndCreateBarChart();
+			//readFromArduino();
 		}
 
 	public static void drawChart(String responses){
