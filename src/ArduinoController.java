@@ -15,6 +15,10 @@ import java.io.OutputStream;
 import java.util.Date;
 
 public class ArduinoController {
+	private static final String D9EDF7 = null;
+
+	private static final String C8383 = null;
+
 	static BufferedReader input;
 
 	static OutputStream output;
@@ -59,6 +63,7 @@ public class ArduinoController {
 							//insertIntoDatabase(new Date().getTime(),responseValues);
 							drawChart(responseValues); */
 							process(responseValues);
+							Barchart();
 							break;
 						}
 					}
@@ -75,7 +80,7 @@ public class ArduinoController {
 		
 		public static void process(String responseValues) {
 			//int newArray[]= new int [30];
-			System.out.println("Entering process");
+			
 			char[] newArray = responseValues.toCharArray();
 			
 			int numofOnes=0;
@@ -117,8 +122,24 @@ public class ArduinoController {
 				//System.out.println(newArray[i]);
 				}
 				
-			
-			
+			 Barchart();
+			var myData = newArray(2005, 2, 2006, 1, 2007, 3, 2008, 6);
+			Object chartid;
+			Object bar;
+			var myChart = new JSChart();
+			myChart.setDataArray(myData);
+			Object aBdB;
+			Object red = null;
+			myChart.setBarColor(red);
+			myChart.setBarOpacity(0.8);
+			String black = null;
+			myChart.setBarBorderColor(black);
+			myChart.setBarValues(false);
+			Object blue = null;
+			myChart.setTitleColor(blue);
+			myChart.setAxisColor(black);
+			myChart.setAxisValuesColor(black);
+			myChart.draw();
 			
 			System.out.print("1: ");
 			for(int i=0;i<numofOnes;i++){
@@ -150,10 +171,21 @@ public class ArduinoController {
 			
 			
 			
-			System.out.println("Exiting process");
+			
 			
 		}
 		
+		private static void Barchart() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		private static var newArray(int i, int j, int k, int l, int m, int n,
+				int o, int p) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 		public static void main(String[]args) throws Exception {
 			//process("23223211134445");
 			
