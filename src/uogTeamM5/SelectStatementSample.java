@@ -13,21 +13,28 @@ public class SelectStatementSample
 
 		 public static void main(String[] args) throws Exception
 		    {
+			 
+			 System.out.println("hello ");
 		        Connection connection = null;
 		        try
 		        {
 		            // Register MySQL JDBC driver to be known by 
 		            // the DriverManager object.
-		            Class.forName("com.Oracle.jdbc.Driver");
+		            Class.forName("oracle.jdbc.driver.OracleDriver");
 		 
 		            // Get a connection to database. We prepare the 
 		            // connection information here such as database 
 		            // url, user and password.
-		            String url = "jdbc:mysql://localhost/testdb";
-		            String user = "root";
-		            String password = "";
-		            connection = DriverManager.getConnection(url, 
-		                user, password);
+		            
+		            //String url = "jdbc:oracle://apollo01.glos.ac.uk/vote_results";
+		            //String url = "jdbc:mysql://localhost/testdb";
+		            
+		            String url="jdbc:oracle:thin:@apollo01.glos.ac.uk:8080:vote_results";
+		            
+		            String workspace = "s1308404";
+		            String user = "s1308404@connect.glos.ac.uk";
+		            String password = "Lol123";
+		            connection = DriverManager.getConnection(url, user, password);
 		 
 		            // Create a statement object instance from the 
 		            // connection
@@ -38,19 +45,17 @@ public class SelectStatementSample
 		            // ID, NAME and ADDRESS field. For ID you can use 
 		            // an auto number, while NAME and ADDRESS are 
 		            // VARCHAR fields.
-		            String sql = "INSERT INTO users (name, address) " +
-		                    "VALUES ('Foo Bar', 'Some Street')";
+		            String sql = "INSERT INTO vote_results(aCount,bCount,cCount,dCount) " +
+		                    "VALUES ('1', '2','4','6')";
 		 
+		            System.out.println("sql: ["+sql+ "]");
 		            // Call an execute method in the statement object 
 		            // and passed the sql or query string to it.
 		            stmt.execute(sql);
 		 
 		            // After this statement is executed you'll have a 
 		            // record in your users table.
-		        } catch (ClassNotFoundException e)
-		        {
-		            System.err.println("Could not load database driver!");
-		        } catch (SQLException e)
+		        } catch (Exception e)
 		        {
 		            e.printStackTrace();
 		        } finally

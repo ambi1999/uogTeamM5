@@ -183,9 +183,9 @@ public class ArduinoController {
 
 		       // Defining axis info and styles
 		       AxisStyle axisStyle = AxisStyle.newAxisStyle(BLACK, 13, AxisTextAlignment.CENTER);
-		       AxisLabels score = AxisLabelsFactory.newAxisLabels("Score", 15.0);
+		       AxisLabels score = AxisLabelsFactory.newAxisLabels("Score", 50.0);
 		       score.setAxisStyle(axisStyle);
-		       AxisLabels year = AxisLabelsFactory.newAxisLabels("Answer", 15.0);
+		       AxisLabels year = AxisLabelsFactory.newAxisLabels("Answer", 50.0);
 		       year.setAxisStyle(axisStyle);
 
 		       // Adding axis info to chart.

@@ -12,6 +12,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/forbarcharts/charts4j-1.3.jar"/>
 	<classpathentry kind="lib" path="lib/forbarcharts/junit-4.4.jar"/>
-	<classpathentry kind="lib" path="E:/workspace/uogTeamM5/lib/database/ojdbc5.jar"/>
+	<classpathentry kind="lib" path="lib/database/ojdbc5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
