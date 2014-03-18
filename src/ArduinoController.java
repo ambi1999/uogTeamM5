@@ -6,6 +6,11 @@
 // March 2014 - xyz - Modified the code to implement the  abc feature
 //replace xyz with your name and abc with the name of feature
 
+import static com.googlecode.charts4j.Color.ALICEBLUE;
+import static com.googlecode.charts4j.Color.BLACK;
+import static com.googlecode.charts4j.Color.BLUEVIOLET;
+import static com.googlecode.charts4j.Color.LAVENDER;
+import static com.googlecode.charts4j.Color.WHITE;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
@@ -13,6 +18,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Date;
+
+import com.googlecode.charts4j.BarChartPlot;
+
+import com.googlecode.charts4j.*;
+
 
 public class ArduinoController {
 	private static final String D9EDF7 = null;
@@ -63,7 +73,6 @@ public class ArduinoController {
 							//insertIntoDatabase(new Date().getTime(),responseValues);
 							drawChart(responseValues); */
 							process(responseValues);
-							Barchart();
 							break;
 						}
 					}
@@ -122,25 +131,7 @@ public class ArduinoController {
 				//System.out.println(newArray[i]);
 				}
 				
-			 Barchart();
-			var myData = newArray(2005, 2, 2006, 1, 2007, 3, 2008, 6);
-			Object chartid;
-			Object bar;
-			var myChart = new JSChart();
-			myChart.setDataArray(myData);
-			Object aBdB;
-			Object red = null;
-			myChart.setBarColor(red);
-			myChart.setBarOpacity(0.8);
-			String black = null;
-			myChart.setBarBorderColor(black);
-			myChart.setBarValues(false);
-			Object blue = null;
-			myChart.setTitleColor(blue);
-			myChart.setAxisColor(black);
-			myChart.setAxisValuesColor(black);
-			myChart.draw();
-			
+			 
 			System.out.print("1: ");
 			for(int i=0;i<numofOnes;i++){
 				System.out.print("*");
@@ -170,15 +161,64 @@ public class ArduinoController {
 			}
 			
 			
+			generateBarChart(numofOnes, numofTwos, numofThrees, numofFours );
 			
 			
 			
 		}
 		
-		private static void Barchart() {
-			// TODO Auto-generated method stub
-			
-		}
+		
+		
+		 //code by Rich
+		   public static void generateBarChart(int numofOnes, int numofTwos, int numofThrees, int numofFours ) {
+		       // EXAMPLE CODE START
+		       // Defining data plots.
+		       //BarChartPlot team1 = Plots.newBarChartPlot(Data.newData(25, 43, 12, 30), BLUEVIOLET, "Team A");
+			   BarChartPlot team1 = Plots.newBarChartPlot(Data.newData(numofOnes,numofTwos, numofThrees, numofFours), BLUEVIOLET, "Team A");
+			   
+			   //BarChartPlot team1 = Plots.newBarChartPlot(Data.newData(4, 5, 8, 3), BLUEVIOLET, "Team A");
+		       
+		       // Instantiating chart.
+		       BarChart chart = GCharts.newBarChart(team1);
+
+		       // Defining axis info and styles
+		       AxisStyle axisStyle = AxisStyle.newAxisStyle(BLACK, 13, AxisTextAlignment.CENTER);
+		       AxisLabels score = AxisLabelsFactory.newAxisLabels("Score", 15.0);
+		       score.setAxisStyle(axisStyle);
+		       AxisLabels year = AxisLabelsFactory.newAxisLabels("Answer", 15.0);
+		       year.setAxisStyle(axisStyle);
+
+		       // Adding axis info to chart.
+		       chart.addXAxisLabels(AxisLabelsFactory.newAxisLabels("A", "B", "C", "D"));
+		       chart.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, 20));
+		       chart.addYAxisLabels(score);
+		       chart.addXAxisLabels(year);
+		       	
+		       chart.setSize(600, 450);
+		       chart.setBarWidth(100);
+		       chart.setSpaceWithinGroupsOfBars(20);
+		       //chart.setDataStacked(true);
+		       chart.setTitle("Team Scores", BLACK, 16);
+		       chart.setGrid(20, 10, 3, 2);
+		       
+		       
+		       chart.setBackgroundFill(Fills.newSolidFill(ALICEBLUE));
+		       LinearGradientFill fill = Fills.newLinearGradientFill(0, LAVENDER, 2-0);
+		       fill.addColorAndOffset(WHITE, 0);
+		       chart.setAreaFill(fill);
+		       
+		       
+		       String url = chart.toURLString();
+		       // EXAMPLE CODE END. Use this url string in your web or
+		       // Internet application.
+		       //Logger.global.info(url);
+		       System.out.println("Open the following URL in any browser: " + url);
+		       
+		       
+		   }
+		   
+		
+		
 
 		private static var newArray(int i, int j, int k, int l, int m, int n,
 				int o, int p) {
@@ -187,17 +227,15 @@ public class ArduinoController {
 		}
 
 		public static void main(String[]args) throws Exception {
-			//process("23223211134445");
+			process("23223211134441");
 			
-			readFromArduinoAndCreateBarChart();
+			//readFromArduinoAndCreateBarChart();
 			//readFromArduino();
 		}
 
 	public static void drawChart(String responses){
 		
 		int responseValues=0;
-		
-		
 		
 		//parse array
 		
