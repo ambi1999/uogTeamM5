@@ -29,9 +29,9 @@ public class SelectStatementSample
 		            //String url = "jdbc:oracle://apollo01.glos.ac.uk/vote_results";
 		            //String url = "jdbc:mysql://localhost/testdb";
 		            
-		            String url="jdbc:oracle:thin:@apollo01.glos.ac.uk:8080:vote_results";
+		            String url="jdbc:oracle:thin:@apollo01.glos.ac.uk:1521:4500:1001:9815834667312::NO:::";
 		            
-		            String workspace = "s1308404";
+		            
 		            String user = "s1308404@connect.glos.ac.uk";
 		            String password = "Lol123";
 		            connection = DriverManager.getConnection(url, user, password);
@@ -45,7 +45,7 @@ public class SelectStatementSample
 		            // ID, NAME and ADDRESS field. For ID you can use 
 		            // an auto number, while NAME and ADDRESS are 
 		            // VARCHAR fields.
-		            String sql = "INSERT INTO vote_results(aCount,bCount,cCount,dCount) " +
+		            String sql = "INSERT INTO vote_results(ACOUNT,BCOUNT,CCOUNT,DCOUNT) " +
 		                    "VALUES ('1', '2','4','6')";
 		 
 		            System.out.println("sql: ["+sql+ "]");
