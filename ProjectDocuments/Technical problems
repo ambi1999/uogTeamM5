@@ -1,0 +1,9 @@
+Programming & Software Development Technical problems
+
+
+1.	The first error we had with the code was in the java program. In the  public static void readFromArduinoAndCreateBarChart section of code we had placed a close port code within the loop. When we ran the code the loop kept running and didn’t exit properly. After figuring out the reson why we realised that the close port code should have been written outside of the loop so that the loop would finish.
+
+2.	The second technical problem we had was with the barchart. We had a problem with converting the scale of the axis of the barchart to match with the values being displayed from the Arduino.
+
+
+3.	The third technical problem we faced was connecting the java program to a database to store the data from the Arduino.
