@@ -161,14 +161,18 @@ public class ArduinoController {
 			}
 			
 			
-			generateBarChart(numofOnes, numofTwos, numofThrees, numofFours );
+			//generateBarChart(numofOnes, numofTwos, numofThrees, numofFours );
+			int total=numofOnes+ numofTwos + numofThrees + numofFours;
+			//generateBarChart(numofOnes*100/total, numofTwos*100/total, numofThrees*100/total, numofFours*100/total );
+			//generateBarChart(4,4 ,3 , 3 );
+			generateBarChart(60,10 ,30 , 0 );
 			
 			
 			
 		}
 		
 		
-		
+	
 		 //code by Rich
 		   public static void generateBarChart(int numofOnes, int numofTwos, int numofThrees, int numofFours ) {
 		       // EXAMPLE CODE START
@@ -190,15 +194,17 @@ public class ArduinoController {
 
 		       // Adding axis info to chart.
 		       chart.addXAxisLabels(AxisLabelsFactory.newAxisLabels("A", "B", "C", "D"));
-		       chart.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, 20));
+		       //chart.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, 20));
+		       chart.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, 100));
 		       chart.addYAxisLabels(score);
 		       chart.addXAxisLabels(year);
 		       	
 		       chart.setSize(600, 450);
 		       chart.setBarWidth(100);
 		       chart.setSpaceWithinGroupsOfBars(20);
+		       
 		       //chart.setDataStacked(true);
-		       chart.setTitle("Team Scores", BLACK, 16);
+		       chart.setTitle("Result in Percentages", BLACK, 16);
 		       chart.setGrid(20, 10, 3, 2);
 		       
 		       
