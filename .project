@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>flowchart_voting_system.jpg</name>
+			<type>1</type>
+			<location>F:/flowchart_voting_system.jpg</location>
+		</link>
+	</linkedResources>
 </projectDescription>

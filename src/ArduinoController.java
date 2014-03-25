@@ -97,17 +97,6 @@ public class ArduinoController {
 			int numofThrees=0;
 			int numofFours=0;
 
-
-			//parse array
-			/*
-			if(==1){
-				numofOnes=numofOnes+1;
-			}		if(==1){
-				numofTwos=numofTwos+1;
-			}
-			*/
-
-			
 			
 			for(int i=0;i<newArray.length;i++){
 				if(newArray[i]=='1'){
