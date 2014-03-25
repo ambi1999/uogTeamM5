@@ -15,12 +15,17 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Date;
 
 import com.googlecode.charts4j.*;
+
+import jxl.*; 
+import jxl.write.*; 
+import jxl.write.Number;
 
 
 public class ArduinoController {
@@ -31,6 +36,11 @@ public class ArduinoController {
 	static BufferedReader input;
 
 	static OutputStream output;
+	
+	static int numofOnes=0;
+	static int numofTwos=0;
+	static int numofThrees=0;
+	static int numofFours=0;
 	
 	
 	//This function will read value from serial port and send email if the value is more than 400
@@ -92,10 +102,7 @@ public class ArduinoController {
 			
 			char[] newArray = responseValues.toCharArray();
 			
-			int numofOnes=0;
-			int numofTwos=0;
-			int numofThrees=0;
-			int numofFours=0;
+			
 
 			
 			for(int i=0;i<newArray.length;i++){
@@ -154,17 +161,87 @@ public class ArduinoController {
 			//generateBarChart(numofOnes, numofTwos, numofThrees, numofFours );
 			int total=numofOnes+ numofTwos + numofThrees + numofFours;
 			//generateBarChart(numofOnes*100/total, numofTwos*100/total, numofThrees*100/total, numofFours*100/total );
+			
 			//generateBarChart(4,4 ,3 , 3 );
-			generateBarChart(60,10 ,30 , 0 );
+			//generateBarChart(4,4 ,3 , 3 );
+			//generateBarChart(60,10 ,30 , 0 );
+			//generateExcelReport(60,10 ,30 , 0);
+			
 			
 			
 			
 		}
 		
+		public static int getMax(int numofOnes, int numofTwos, int numofThrees, int numofFours){
+			
+			int max=0;
+			
+			if(max < numofOnes){
+				max=numofOnes;
+			}
+			
+			
+			return max;
+		}
+		public static void generateExcelReport(int numofOnes, int numofTwos, int numofThrees, int numofFours) throws Exception{
+			
+			WritableWorkbook workbook = Workbook.createWorkbook(new File("test1.xls"));
+			WritableSheet sheet = workbook.createSheet("First Sheet", 0);
+			Label lblEmpnickname=new Label(0,1,"Voting Options");
+			Label lblEmpnickname1=new Label(1,1,"Voting results");
+			    Label lblEmpName=new Label(0,2,"1");
+			    Label lblEmpID=new Label(0,3,"2");
+			    Label lblSex=new Label(0,4,"3");
+			    Label lblDOB=new Label(0,5,"4");
+			    
+			    Label lblEmpName1=new Label(1,2,numofOnes+"");
+			    Label lblEmpID1=new Label(1,3,numofTwos+"");
+			    Label lblSex1=new Label(1,4,numofThrees+"");
+			    Label lblDOB1=new Label(1,5,numofFours+"");
+			    
+			    
+			    
+			    sheet.addCell(lblEmpnickname);
+			    sheet.addCell(lblEmpnickname1);
+			    sheet.addCell(lblEmpName);
+			    sheet.addCell(lblEmpID);
+			    sheet.addCell(lblSex);
+			    sheet.addCell(lblDOB);
+			    
+			    
+			    sheet.addCell(lblEmpName1);
+			    sheet.addCell(lblEmpID1);
+			    sheet.addCell(lblSex1);
+			    sheet.addCell(lblDOB1);
+			    
+			    
+			//Label label = new Label(0, 2, "1"); 
+			//Label label = new Label(0, 3, "2"); 
+			//Label label= new Label(0, 4, "3"); 
+			//Label label= new Label(0, 5, "4"); 
+			//sheet.addCell(label); 
+	       // Number number = new Number(1, 2, 6); 
+			//Number number = new Number(1, 3, 3);
+			//Number number = new Number(1, 4, 4);
+			//Number number = new Number(1, 5, 3); 
+			//sheet.addCell(number);
+			// All sheets and cells added. Now write out the workbook 
+			workbook.write(); 
+			workbook.close();
+			
+		}
 		
 	
 		 //code by Rich
 		   public static void generateBarChart(int numofOnes, int numofTwos, int numofThrees, int numofFours ) {
+			   int max=getMax(numofOnes,numofTwos, numofThrees, numofFours);
+			   
+			   numofOnes=numofOnes*100/max;
+			   numofTwos=numofTwos*100/max;
+			   numofThrees=numofThrees*100/max;
+			   numofFours=numofFours*100/max;
+			   
+			   
 		       // EXAMPLE CODE START
 		       // Defining data plots.
 		       //BarChartPlot team1 = Plots.newBarChartPlot(Data.newData(25, 43, 12, 30), BLUEVIOLET, "Team A");
@@ -185,7 +262,7 @@ public class ArduinoController {
 		       // Adding axis info to chart.
 		       chart.addXAxisLabels(AxisLabelsFactory.newAxisLabels("A", "B", "C", "D"));
 		       //chart.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, 20));
-		       chart.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, 100));
+		       chart.addYAxisLabels(AxisLabelsFactory.newNumericRangeAxisLabels(0, max));
 		       chart.addYAxisLabels(score);
 		       chart.addXAxisLabels(year);
 		       	
@@ -232,10 +309,13 @@ public class ArduinoController {
 		}
 
 		public static void main(String[]args) throws Exception {
-			process("23223211134441");
+			//process("22222211111133433434324342342434323223211134441");
 			
-			//readFromArduinoAndCreateBarChart();
+			readFromArduinoAndCreateBarChart();
+			generateBarChart( numofOnes,  numofTwos,  numofThrees,  numofFours);
 			//readFromArduino();
+			generateExcelReport(numofOnes,  numofTwos,  numofThrees,  numofFours);
+			
 		}
 
 	public static void drawChart(String responses){
