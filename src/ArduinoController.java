@@ -131,14 +131,15 @@ public class ArduinoController {
 				//System.out.println(newArray[i]);
 				}
 				
-			 
+			 //The following script prints the number 1 and counts the number of times it has been pressed );
+			
 			System.out.print("1: ");
 			for(int i=0;i<numofOnes;i++){
 				System.out.print("*");
 			}
 
 			System.out.println();
-
+			 //The following script prints the number 2 and counts the number of times it has been pressed );
 			System.out.print("2: ");
 			for(int i=0;i<numofTwos;i++){
 				System.out.print("*");
@@ -146,7 +147,7 @@ public class ArduinoController {
 
 			System.out.println();
 
-
+			 //The following script prints the number 3 and counts the number of times it has been pressed );
 			System.out.print("3: ");
 			for(int i=0;i<numofThrees;i++){
 				System.out.print("*");
@@ -154,7 +155,7 @@ public class ArduinoController {
 
 			System.out.println();
 
-
+			 //The following script prints the number 4 and counts the number of times it has been pressed );
 			System.out.print("4: ");
 			for(int i=0;i<numofFours;i++){
 				System.out.print("*");

@@ -4,6 +4,12 @@ Created On: 2011-9-17
 Website / More Infomation: http://www.b2cqshop.com
 Email: b2cqshop@gmail.com
 */
+
+/* Edited/Coded By: Ricahrd Dobie
+              Sohil Shaikh
+              Cleveland Rouge
+              Joseph Webb
+*/
 #define IR_IN  8  //Infrared receiver Pin
 
 int Pulse_Width=0;//Storage width 
@@ -18,7 +24,7 @@ int convertHexToKeyPressed(char a){
   
   if(a==0x16 ){
   result=0;
-   
+  //The follwoing hex values will be changed to  either 1, 2, 3 or 4 as they will be our voting options 
   }else if (a == 0xC){
   result=1;
   }else if (a == 0x18){
@@ -42,7 +48,8 @@ int convertHexToKeyPressed(char a){
   return result;
 }
 
-
+//The following code was taking from the user help guide to one members Arduino kit
+//This is the code for our remote sensor
 void timer1_init(void)//Timer initialization function
 {
   TCCR1A = 0X00; 
