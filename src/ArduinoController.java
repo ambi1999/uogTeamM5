@@ -15,11 +15,10 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Date;
-
-import com.googlecode.charts4j.BarChartPlot;
 
 import com.googlecode.charts4j.*;
 
@@ -73,6 +72,7 @@ public class ArduinoController {
 							//insertIntoDatabase(new Date().getTime(),responseValues);
 							drawChart(responseValues); */
 							process(responseValues);
+							
 							break;
 						}
 					}
@@ -183,7 +183,7 @@ public class ArduinoController {
 			   //BarChartPlot team1 = Plots.newBarChartPlot(Data.newData(4, 5, 8, 3), BLUEVIOLET, "Team A");
 		       
 		       // Instantiating chart.
-		       BarChart chart = GCharts.newBarChart(team1);
+		       final BarChart chart = GCharts.newBarChart(team1);
 
 		       // Defining axis info and styles
 		       AxisStyle axisStyle = AxisStyle.newAxisStyle(BLACK, 13, AxisTextAlignment.CENTER);
@@ -220,7 +220,16 @@ public class ArduinoController {
 		       //Logger.global.info(url);
 		       System.out.println("Open the following URL in any browser: " + url);
 		       
-		       
+		       class InternetBrowser {
+
+					public void main(String[] args) throws IOException {
+						String url = "chart.toURLString()";
+						//String url="http://www.google.com";
+						java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+
+					}
+
+				}
 		   }
 		   
 		
