@@ -46,17 +46,14 @@ public class ArduinoController {
 	//This function will read value from serial port and send email if the value is more than 400
 		public static void readFromArduinoAndCreateBarChart() throws Exception {
 			System.out.println("1111");
-			// for linux
-			// CommPortIdentifier portId =
-			// CommPortIdentifier.getPortIdentifier("/dev/ttyACM3");
+	
 
-			// for windows
+		
 			CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier("COM3");
-			// CommPortIdentifier portId =
-			// CommPortIdentifier.getPortIdentifier("COM4");
+	
 
 			SerialPort port = (SerialPort) portId.open("serial talk", 4000);
-			// input = port.getInputStream();
+			
 			input = new BufferedReader(new InputStreamReader(port.getInputStream()));
 			port.setSerialPortParams(9600, SerialPort.DATABITS_8,
 					SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
@@ -71,16 +68,14 @@ public class ArduinoController {
 					if (input.ready()) {
 						
 						inputLine = input.readLine();
-						// System.out.println(inputLine);
+					
 						int value = Integer.parseInt(inputLine);
 						responseValues=responseValues+value;
 						
 						System.out.println("[" + responseValues + "]");
 						if (value == 8) {
 							
-				/*		 System.out.println("finish and create bar chart");
-							//insertIntoDatabase(new Date().getTime(),responseValues);
-							drawChart(responseValues); */
+				
 							process(responseValues);
 							
 							break;
@@ -98,7 +93,7 @@ public class ArduinoController {
 		}
 		
 		public static void process(String responseValues) {
-			//int newArray[]= new int [30];
+		// this code will add the response values to an Array List
 			
 			char[] newArray = responseValues.toCharArray();
 			
@@ -124,7 +119,7 @@ public class ArduinoController {
 					numofFours=numofFours+1;	
 				}
 				
-				//System.out.println(newArray[i]);
+			
 				}
 				
 			 //The following script prints the number 1 and counts the number of times it has been pressed );
@@ -160,12 +155,9 @@ public class ArduinoController {
 			
 			//generateBarChart(numofOnes, numofTwos, numofThrees, numofFours );
 			int total=numofOnes+ numofTwos + numofThrees + numofFours;
-			//generateBarChart(numofOnes*100/total, numofTwos*100/total, numofThrees*100/total, numofFours*100/total );
+		
 			
-			//generateBarChart(4,4 ,3 , 3 );
-			//generateBarChart(4,4 ,3 , 3 );
-			//generateBarChart(60,10 ,30 , 0 );
-			//generateExcelReport(60,10 ,30 , 0);
+	
 			
 			
 			
@@ -173,7 +165,7 @@ public class ArduinoController {
 		}
 		
 		public static int getMax(int numofOnes, int numofTwos, int numofThrees, int numofFours){
-			
+			//this code finds the maximum number of votes which will then help to generate the axis for the barchart
 			int max=0;
 			
 			if(max < numofOnes){
@@ -184,7 +176,7 @@ public class ArduinoController {
 			return max;
 		}
 		public static void generateExcelReport(int numofOnes, int numofTwos, int numofThrees, int numofFours) throws Exception{
-			
+			// this code saves the data to an excel spreadsheet
 			WritableWorkbook workbook = Workbook.createWorkbook(new File("test1.xls"));
 			WritableSheet sheet = workbook.createSheet("First Sheet", 0);
 			Label lblEmpnickname=new Label(0,1,"Voting Options");
@@ -214,17 +206,8 @@ public class ArduinoController {
 			    sheet.addCell(lblSex1);
 			    sheet.addCell(lblDOB1);
 			    
-			    
-			//Label label = new Label(0, 2, "1"); 
-			//Label label = new Label(0, 3, "2"); 
-			//Label label= new Label(0, 4, "3"); 
-			//Label label= new Label(0, 5, "4"); 
-			//sheet.addCell(label); 
-	       // Number number = new Number(1, 2, 6); 
-			//Number number = new Number(1, 3, 3);
-			//Number number = new Number(1, 4, 4);
-			//Number number = new Number(1, 5, 3); 
-			//sheet.addCell(number);
+
+		
 			// All sheets and cells added. Now write out the workbook 
 			workbook.write(); 
 			workbook.close();
@@ -232,8 +215,10 @@ public class ArduinoController {
 		}
 		
 	
-		 //code by Rich
-		   public static void generateBarChart(int numofOnes, int numofTwos, int numofThrees, int numofFours ) {
+	
+		   public static void generateBarChart(int numofOnes, int numofTwos, int numofThrees, int numofFours )
+		   // this code generates the Barchart and generates a URL
+		   {
 			   int max=getMax(numofOnes,numofTwos, numofThrees, numofFours);
 			   
 			   numofOnes=numofOnes*100/max;
@@ -242,12 +227,12 @@ public class ArduinoController {
 			   numofFours=numofFours*100/max;
 			   
 			   
-		       // EXAMPLE CODE START
+		  
 		       // Defining data plots.
-		       //BarChartPlot team1 = Plots.newBarChartPlot(Data.newData(25, 43, 12, 30), BLUEVIOLET, "Team A");
+		     
 			   BarChartPlot team1 = Plots.newBarChartPlot(Data.newData(numofOnes,numofTwos, numofThrees, numofFours), BLUEVIOLET, "Team A");
 			   
-			   //BarChartPlot team1 = Plots.newBarChartPlot(Data.newData(4, 5, 8, 3), BLUEVIOLET, "Team A");
+			 
 		       
 		       // Instantiating chart.
 		       final BarChart chart = GCharts.newBarChart(team1);
@@ -287,16 +272,11 @@ public class ArduinoController {
 		       //Logger.global.info(url);
 		       System.out.println("Open the following URL in any browser: " + url);
 		       
-		       class InternetBrowser {
+		  
 
-					public void main(String[] args) throws IOException {
-						String url = "chart.toURLString()";
-						//String url="http://www.google.com";
-						java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+					
 
-					}
-
-				}
+				
 		   }
 		   
 		
